@@ -1,4 +1,4 @@
-package apikit
+package appkit
 
 import (
 	"encoding/json"
@@ -18,7 +18,6 @@ func WriteJSON(w http.ResponseWriter, statusCode int, data interface{}) {
 
 // WriteErrorJSON – удобная функция для вывода AppError (или обычной ошибки) в формате JSON.
 func WriteErrorJSON(w http.ResponseWriter, err error) {
-	// Извлекаем статус-код.
 	code := StatusCodeFromError(err)
 
 	var appErr *AppError

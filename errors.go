@@ -1,4 +1,4 @@
-package apikit
+package appkit
 
 import (
 	"errors"
@@ -12,7 +12,7 @@ import (
 type AppError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
-	Err     error  `json:"-"` // Вложенная (корневая) ошибка
+	Err     error  `json:"-"`
 }
 
 // Error – реализует интерфейс error, чтобы AppError можно было использовать как обычную ошибку.
@@ -51,6 +51,20 @@ func ValidationError(message string) *AppError {
 func InternalError(message string) *AppError {
 	return &AppError{
 		Code:    http.StatusInternalServerError,
+		Message: message,
+	}
+}
+
+func UnauthorizedError(message string) *AppError {
+	return &AppError{
+		Code:    http.StatusUnauthorized,
+		Message: message,
+	}
+}
+
+func ForbiddenError(message string) *AppError {
+	return &AppError{
+		Code:    http.StatusForbidden,
 		Message: message,
 	}
 }
